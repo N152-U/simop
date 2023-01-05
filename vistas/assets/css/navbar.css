@@ -1,0 +1,14 @@
+@media only screen and (min-width: 992px) {
+    .brand-logo{
+        margin-left: 30px;
+    }
+    .left-menu {
+        padding-left: 320px;
+    }
+
+    .left-menu-oculto {
+        padding-left: 20px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {}

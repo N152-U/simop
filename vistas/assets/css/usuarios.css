@@ -1,0 +1,42 @@
+ 
+   
+  
+  @media only screen and (min-width: 450px) {
+
+
+    .botones-flotantes {
+        position: sticky !important;
+        display: inline-block;
+        right: 30px;
+        right: 15vw;
+        height: 46px;
+    }
+    
+    }
+    
+    @media only screen and (min-width: 600px) {
+    
+    .botones-flotantes {
+        position: sticky !important;
+        display: inline-block;
+        right: 30px;
+        right: 15vw;
+        height: 46px;
+    }
+    }
+    
+    @media only screen and (min-height: 900px) {
+    .botones-flotantes {
+        position: sticky !important;
+        display: inline-block;
+        right: 30px;
+        right: 15vw;
+        height: 46px;
+    }
+    
+    
+    }
+    .fixed-action-btn.direction-left ul li, .fixed-action-btn.direction-right ul li {
+        display: inline-block;
+        margin: 0px 25px 0 0 !important;
+    }

@@ -1,0 +1,606 @@
+
+
+
+
+<?php
+require_once "./controladores/filtrosControlador.php";
+
+$data_url = explode("/", $_GET["vistas"]);
+$instanciaFiltros = new filtrosControlador();
+$contenedorcategorias = $instanciaFiltros::obtener_categorias_filtros_controlador();
+$contenedoractivadores = $instanciaFiltros::obtener_activadores_filtros_controlador(0);
+print_r($contenedorcategorias);
+?>
+<script>
+    $(document).ready(function() {
+        // $('#categoria_id').select2();
+        // $('#subcategoria_id').select2();
+    });
+</script>
+
+<main>
+
+    <form id="formularioEdicion" class="form-contenido col s12" method="post" enctype="multipart/form-data">
+
+        <!-- <ul class="collapsible">
+    
+    <?php foreach ($contenedorcategorias as $categoria) {
+
+        echo '<li>
+        <div class="collapsible-header"><i class="material-icons">add</i>' . $categoria["categoria"] . '</div>
+        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        </li>';
+    } ?>
+  </ul> -->
+        <div class="row">
+            <div class="col s2">Categoria:</div>
+            <div class="col s6"><input type="text" id="categoria" name="categoria" value="" placeholder="Captura una categoria" autocomplete="off"></div>
+            <div class="col s4">
+                <a class="waves-effect" id="categoriacancel"><i class="material-icons left">cancel</i></a>
+                <a class="waves-effect" id="categoriaedit"><i class="material-icons left">create</i></a>
+                <a class="waves-effect" id="categoriadelete"><i class="material-icons left">delete</i></a>
+                <a class="waves-effect" id="categoriaadd"><i class="material-icons left">add</i></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s2">
+                Categorias:
+            </div>
+            <div class="col s10">
+
+                <select style="display: block; height: 200px !important" id="categoria_id" name="categoria_id" size="5">
+                    <?php foreach ($contenedorcategorias as $categoria) {
+                        echo '<option value="' . $categoria["id"] . '" id="' . $categoria["categoria"] . '">' . $categoria["categoria"] . '</option>';
+                    } ?>
+
+                </select>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s2">Articulo:</div>
+            <div class="col s6"><input type="text" id="subcategoria" name="subcategoria" placeholder="Captura un articulo" autocomplete="off"></div>
+            <div class="col s4">
+                <a class="waves-effect" id="subcategoriacancel"><i class="material-icons left">cancel</i></a>
+                <a class="waves-effect" id="subcategoriaedit"><i class="material-icons left">create</i></a>
+                <a class="waves-effect" id="subcategoriadelete"><i class="material-icons left">delete</i></a>
+                <a class="waves-effect" id="subcategoriaadd"><i class="material-icons left">add</i></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s5">
+                <span id="subcategoria_header">
+                    Articulos libres:
+                </span>
+                <select style="display: block; height: 200px !important" id="subcategoria_id" name="subcategoria_id" size="5">
+                    <!--Se llena con script-->
+
+                </select>
+            </div>
+            <div class="col s2" style="margin-top:5rem; padding:0rem 5vw">
+                <input type="button" id="btnLeft" value="&lt;&lt;" />
+                <input type="button" id="btnRight" value="&gt;&gt;" />
+            </div>
+            <div class="col s5">
+                <span id="subcategoriarel_header">
+                    Articulos relacionados a:
+                </span>
+                <select style="display: block; height: 200px !important" id="subcategoriarel_id" name="subcategoriarel_id" size="5">
+                    <!-- <?php foreach ($contenedorsubcategorias as $subcategoria) {
+                                echo '<option value="' . $subcategoria["id"] . '" id="' . $subcategoria["id"] . '">' . $subcategoria["categoria"];
+                            } ?> -->
+
+                    <!--Se llena con script-->
+                </select>
+            </div>
+        </div>
+
+
+        <div class="row" id="activadores" hidden>
+
+
+            <?php foreach ($contenedoractivadores as $activador) {
+                echo '<div class="col s6 m6 l6">';
+
+                echo '<label>
+                                        <input id="check_' . $activador["activador"] . '"name="check_' . $activador["activador"] . '" type="checkbox" class="filled-in"  />
+                                          <span>' . $activador["activador"] . '</span>
+                                        </label>';
+
+
+                // echo '<h1>'.$activador["activador"].'</h1>';
+                echo ' </div>';
+            } ?>
+            <div class="col s12 m12 l12 center-align">
+                <input id="submit" class="btn buttons-creacion" name="submit" type="submit" onclick="getValue()" value="<?php echo isset($datosarticulo) ? "GUARDAR" : "CREAR"; ?>">
+            </div>
+
+        </div>
+    </form>
+    <script>
+        $(document).ready(function() {
+            $('#categoriacancel').hide();
+            $('#categoriaedit').hide();
+            $('#categoriadelete').hide();
+
+
+        });
+        $('#categoriaadd').click(function(e) {
+            $('#categoria_id').append($("<option>")
+                                .attr("value",e.target.value).text(e.target.value));
+        });
+        $('#categoriacancel').click(function(e) {
+            $('#categoria_id').val("").change();
+        });
+        $('#categoria').change(function(e) {
+           
+
+            console.log(e.target.value)
+            console.log($('#categoria_id').val())
+            if (e.target.value != "") {
+                $('#categoriacancel').show();
+                $('#categoriaedit').show();
+                $('#categoriadelete').show();
+                $('#categoriaadd').hide();
+            } else {
+                $('#categoriacancel').hide();
+                $('#categoriaedit').hide();
+                $('#categoriadelete').hide();
+
+                $('#categoriaadd').show();
+            }
+        });
+        $('#btnLeft').click(function() {
+
+            var selectedItem = $('#subcategoriarel_id option:selected');
+            $('#subcategoria_id').append(selectedItem);
+            $('#subcategoria').val(selectedItem.text()).change();
+            $('#activadores').hide();
+        });
+
+        $('#btnRight').click(function() {
+
+            var selectedItem = $('#subcategoria_id option:selected');
+            $('#subcategoriarel_id').append(selectedItem);
+            $('#subcategoria').val("").change();
+            $('#activadores').show();
+            var id = selectedItem.val();
+            $.ajax({
+
+                url: serverurl + "ajax/filtrosAjax.php",
+                method: "post",
+                data: {
+                    subcategoria_id: id,
+                    accion: "BUSCAR"
+                },
+                success: function(res) {
+                    res = JSON.parse(res);
+                    var $el = $('#activadores');
+
+                    $("#activadores :input").each(function(key, element) {
+                        element.checked = false;
+                    });
+
+
+                    $.each(res, function(key, value) {
+                        console.log(value["activador"])
+                        $("#check_" + value["activador"])
+                            .prop("checked", true);
+                    });
+                }
+            });
+        });
+
+        $('#categoria_id').change(function(e) {
+            var selectedItem = $('#categoria_id option:selected');
+            $('#subcategoriarel_header').text("Articulos relacionados a " + selectedItem.text() + ":");
+            $('#categoria').val(selectedItem.text()).change();
+            $('#activadores').hide();
+            var id = e.target.value;
+
+
+            console.log("Categoria->" + id);
+            if (id!=null&& id!="") {
+                $.ajax({
+
+                    url: serverurl + "ajax/articuloAjax.php",
+                    method: "post",
+                    data: {
+                        categoria_id: id,
+                        accion: "BUSCAR"
+                    },
+                    success: function(res) {
+                        res = JSON.parse(res);
+                        var $el = $('#subcategoriarel_id');
+                        $('#subcategoriarel_id').empty();
+                        $el.empty(); // remove old options
+                        $.each(res, function(key, value) {
+                            $el.append($("<option>")
+                                .attr("value", value["id"]).text(value["subcategoria"]));
+                        });
+                    }
+                });
+            }
+
+
+
+        });
+
+        $('#subcategoriarel_id').change(function(e) {
+
+            var id = e.target.value;
+            if (id != "" && id != undefined) {
+                $('#activadores').show();
+                console.log("Subcategoria->" + id);
+                // $('#activadores').text("Subcategoria: "+id)
+                $.ajax({
+
+                    url: serverurl + "ajax/filtrosAjax.php",
+                    method: "post",
+                    data: {
+                        subcategoria_id: id,
+                        accion: "BUSCAR"
+                    },
+                    success: function(res) {
+                        res = JSON.parse(res);
+                        var $el = $('#activadores');
+
+                        $("#activadores :input").each(function(key, element) {
+                            element.checked = false;
+                        });
+
+
+                        $.each(res, function(key, value) {
+                            console.log(value["activador"])
+                            $("#check_" + value["activador"])
+                                .prop("checked", true);
+                        });
+                    }
+                });
+
+            } else {
+                $('#activadores').hide();
+                console.log("Subcategoria->" + id);
+                // $('#activadores').text("Subcategoria: "+id)
+
+            }
+
+        });
+
+        $('#subcategoria_id').click(function(e) {
+
+            var selectedItem = $('#subcategoria_id option:selected');
+            $('#subcategoria').val(selectedItem.text()).change();
+            $('#activadores').hide();
+
+
+
+
+        });
+    </script>
+
+    <?php
+
+    if (isset($_POST["submit"])) {
+
+        // $res=$instanciaFiltros::crear_categoria_filtros_controlador($_POST);
+        // print_r($res) ;
+        print_r($_POST);
+    }
+
+
+    ?>
+</main>
+
+
+<?php
+require_once "./controladores/filtrosControlador.php";
+
+$data_url = explode("/", $_GET["vistas"]);
+$instanciaFiltros = new filtrosControlador();
+$contenedorcategorias = $instanciaFiltros::obtener_categorias_filtros_controlador();
+$contenedoractivadores = $instanciaFiltros::obtener_activadores_filtros_controlador(0);
+// print_r($contenedorcategorias);
+?>
+
+<main>
+    <style>
+        .formularioBoton {
+            cursor: pointer;
+        }
+
+        .tooltip {
+
+            position: relative;
+            display: inline-block;
+            /* border-bottom: 1px dotted black; */
+        }
+
+        .tooltip .tooltiptext {
+            margin-top: 2vh;
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+    </style>
+    <form id="formularioEdicion" class="form-contenido col s12" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <!-- <div class="col s2">
+                Categoria:
+            </div> -->
+            <div class="col s12" id="contenedorcategorias">
+                <div class="col s6">
+                    <span id="titulocategoria">Elija o cree una categoria:</span>
+                    <input list="categorias" name="categoria" id="categoria" autocomplete="off" required>
+                    <datalist id="categorias">
+                        <?php foreach ($contenedorcategorias as $categoria) {
+                            echo '<option value="' . $categoria["categoria"] . '" id="' . $categoria["id"] . '">';
+                        } ?>
+
+
+                    </datalist>
+                    <input name="categoria_id" id="categoria_id" hidden>
+                </div>
+                <div class="col s6" style="margin-top: 2vh">
+                    <div class="tooltip"> <a class="formularioBoton" id="categoriaadd"><i class="material-icons left">add_circle</i></a><span class="tooltiptext">Agregar categoria</span></div>
+                    <div class="tooltip"> <a class="formularioBoton" id="categoriacancel"><i class="material-icons left" style="color: gray">undo</i></a><span class="tooltiptext">Vaciar campo categoria</span></div>
+                    <div class="tooltip"> <a class="formularioBoton" id="categoriaedit" hidden><i class="material-icons left" style="color: #61c0e0">create</i></a><span class="tooltiptext">Editar categoria</span></div>
+                    <div class="tooltip"> <a class="formularioBoton" id="categoriadelete" hidden><i class="material-icons left" style="color:red">delete</i></a><span class="tooltiptext">Eliminar categoria</span></div>
+
+
+
+                </div>
+            </div>
+
+            <!-- <div class="col s2">
+                Subcategoria:
+            </div> -->
+            <div class="col s6" hidden id="contenedorsubcategorias">
+                <div class="col s6">
+                    <span id="titulosubcategoria">Elija o cree un articulo:</span>
+                    <input list="subcategorias" name="subcategoria" autocomplete="off" id="subcategoria" required>
+                    <datalist id="subcategorias">
+                        <!-- <?php foreach ($contenedorsubcategorias as $subcategoria) {
+                                    echo '<option value="' . $subcategoria . '">';
+                                } ?> -->
+                        <!--Se añaden los campos con ajax-->
+
+                    </datalist>
+                    <input name="subcategoria_id" id="subcategoria_id" hidden>
+                </div>
+                <div class="col s6" style="margin-top: 2vh">
+                    <div class="tooltip"> <a class="formularioBoton" id="subcategoriaadd"><i class="material-icons left">add_circle</i></a><span class="tooltiptext">Agregar subcategoria</span></div>
+                    <div class="tooltip"> <a class="formularioBoton" id="subcategoriacancel"><i class="material-icons left" style="color: gray">undo</i></a><span class="tooltiptext">Vaciar campo subcategoria</span></div>
+                    <div class="tooltip"> <a class="formularioBoton" id="subcategoriaedit" hidden><i class="material-icons left" style="color: #61c0e0">create</i></a><span class="tooltiptext">Editar subcategoria</span></div>
+                    <div class="tooltip"> <a class="formularioBoton" id="subcategoriadelete" hidden><i class="material-icons left" style="color:red">delete</i></a><span class="tooltiptext">Eliminar subcategoria</span></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="activadores" hidden>
+            <div class="col s12">
+                <h5>Activador de campos</h5>
+                <?php foreach ($contenedoractivadores as $activador) {
+                    echo '<div class="col s6 m6 l6">';
+
+                    echo '<label>
+                                <input id="check_' . $activador["activador"] . '"name="check_' . $activador["activador"] . '" type="checkbox" class="filled-in"  />
+                                <span>' . $activador["activador"] . '</span>
+                                </label>';
+                    // echo '<h1>'.$activador["activador"].'</h1>';
+                    echo ' </div>';
+                } ?>
+                <div class="col s12 m12 l12 center-align">
+                    <input id="submit" class="btn buttons-creacion" name="submit" type="submit" value="GUARDAR">
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <script>
+        $('#categoriaadd').click(function(e) {
+            var categoria = $('#categoria').val();
+            console.log("CREANDO categoria -> " + categoria)
+            $('#categorias').append($("<option>").attr("value", categoria).attr("id", 123).attr("selected", true));
+                    categorias();
+            // $.ajax({
+
+            //     url: serverurl + "ajax/articuloAjax.php",
+            //     method: "post",
+            //     data: {
+            //         categoria_id: id,
+            //         accion: "BUSCAR"
+            //     },
+            //     success: function(res) {
+            //         res = JSON.parse(res);
+                   
+            //     }
+            // });
+        });
+
+        $('#subcategoriaadd').click(function(e) {
+            var subcategoria = $('#subcategoria').val();
+            console.log("CREANDO categoria -> " + subcategoria)
+            $('#subcategorias').append($("<option>").attr("value", subcategoria).attr("id", 123).attr("selected", true));
+            subcategorias();
+
+        });
+
+        $('#categoriacancel').click(function(e) {
+            $('#titulocategoria').text('Elija o cree una categoria:');
+            $('[name="categoria"]').text('');
+            $('[name="categoria"]').val('').change();
+            // $('#contenedorcategorias').addClass('col s12');
+            $('#categoria_id').val('').change();
+            $('[name="subcategoria"]').text('');
+            $('[name="subcategoria"]').val('');
+            $('#subcategoria_id').val('');
+            categorias();
+
+        });
+
+        $('#subcategoriacancel').click(function(e) {
+            $('[name="subcategoria"]').text('');
+            $('[name="subcategoria"]').val('');
+            $('#subcategoria_id').val('');
+            subcategorias();
+        });
+
+        $('[name="categoria"]').keyup(function(e) {
+
+
+            var id = $('#categorias').find('option[value="' + e.target.value + '"]').attr('id');
+
+            if (id != null && id != undefined && id != "") {
+                $('[name="subcategoria"]').text('');
+                $('[name="subcategoria"]').val('');
+                $('#subcategoria_id').val('');
+                categorias();
+
+
+
+                subcategorias();
+            }
+            // else {
+            //     $('#titulocategoria').text('Elija o cree una categoria:');
+            // }
+
+            console.log(id);
+        });
+
+        $('[name="subcategoria"]').keyup(function(e) {
+
+            var id = $('#subcategorias').find('option[value="' + e.target.value + '"]').attr('id');
+
+            if (id != null && id != undefined && id != "") {
+                subcategorias();
+            }
+            // else {
+            //     $('#titulosubcategoria').text('Elija o cree una subcategoria:');
+            // }
+
+
+            console.log(id);
+        });
+
+
+
+        function categorias() {
+
+            var id = $('#categorias').find('option[value="' + $('[name="categoria"]').val() + '"]').attr('id');
+            if (id != null && id != undefined && id != "" && $('#categoria_id').val() == "") {
+                $('#contenedorcategorias').removeClass('col s12')
+                $('#contenedorcategorias').addClass('col s6');
+                $('#titulocategoria').text('Editando categoria ' + $('[name="categoria"]').val())
+                $('#categoriaedit').show();
+                $('#categoriadelete').show();
+                $('#categoriaadd').hide();
+                $("#categoria_id").attr("value", id);
+
+                $.ajax({
+
+                    url: serverurl + "ajax/articuloAjax.php",
+                    method: "post",
+                    data: {
+                        categoria_id: id,
+                        accion: "BUSCAR"
+                    },
+                    success: function(res) {
+                        res = JSON.parse(res);
+                        var $el = $('#subcategorias');
+                        $('#subcategoria').empty();
+                        $el.empty(); // remove old options
+                        $.each(res, function(key, value) {
+                            $el.append($("<option>")
+                                .attr("value", value["subcategoria"]).attr("id", value["id"]));
+                        });
+                    }
+                });
+                $('#contenedorsubcategorias').show();
+            } else {
+                $('#contenedorcategorias').addClass('col s12');
+                $("#categoria_id").attr("value", '').change();
+                $('#categoriaedit').hide();
+                $('#categoriadelete').hide();
+                $('#categoriaadd').show();
+                $("#subcategoria").val('');
+                $('#contenedorsubcategorias').hide();
+                $("#activadores").hide();
+            }
+
+            console.log("Categoria->" + id);
+        }
+
+        function subcategorias() {
+            var id = $('#subcategorias').find('option[value="' + $('[name="subcategoria"]').val() + '"]').attr('id');
+            if (id != null && id != undefined && id != "") {
+                $('#titulosubcategoria').text('Editando articulo ' + $('[name="subcategoria"]').val())
+                $('#subcategoriaedit').show();
+                $('#subcategoriadelete').show();
+                $('#subcategoriaadd').hide();
+                $("#subcategoria_id").attr("value", id);
+
+                $.ajax({
+
+                    url: serverurl + "ajax/filtrosAjax.php",
+                    method: "post",
+                    data: {
+                        subcategoria_id: id,
+                        accion: "BUSCAR"
+                    },
+                    success: function(res) {
+                        res = JSON.parse(res);
+                        var $el = $('#activadores');
+
+                        $("#activadores :input").each(function(key, element) {
+                            element.checked = false;
+                        });
+
+
+                        $.each(res, function(key, value) {
+                            console.log(value["activador"])
+                            $("#check_" + value["activador"])
+                                .prop("checked", true);
+                        });
+
+                        $("#activadores").show();
+                    }
+                });
+
+            } else {
+                $('#titulosubcategoria').text('Elija o cree una articulo:');
+                $("#subcategoria_id").attr("value", '').change();
+                $('#subcategoriaedit').hide();
+                $('#subcategoriadelete').hide();
+                $('#subcategoriaadd').show();
+                $("#activadores").hide();
+            }
+            console.log("Subcategoria->" + id);
+        }
+    </script>
+
+    <?php
+
+    if (isset($_POST["submit"])) {
+
+        // $res = $instanciaFiltros::crear_categoria_filtros_controlador($_POST);
+        // print_r($res);
+        print_r($_POST);
+    }
+
+
+    ?>
+</main>

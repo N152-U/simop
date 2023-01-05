@@ -1,0 +1,54 @@
+.datepicker-controls .select-month input {
+    width: 92px;
+}/*NO MOVER AJUSTA RECUADRO DE FECHA EN TIMEPICKER*/
+
+.datepicker-date-display
+{
+    background-color: #2196F3;
+}
+
+.timepicker-digital-display
+{
+    background-color:#2196F3;
+    stroke:#2196F3;
+}
+
+.timepicker-canvas line
+{
+    stroke: #2196F3;
+}
+
+.timepicker-canvas-bearing
+{
+    stroke: #2196F3;
+    fill: #2196F3;
+}
+
+.timepicker-canvas-bg
+{
+    stroke: #2196F3;
+    fill: #2196F3;
+}
+.form-contenido
+{
+    margin: 3rem;
+    padding: 2rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.buttons-creacion
+{
+    background-color: #2196F3;
+    height: 3rem;
+}
+
+.remove-attr:hover {
+    background-color: red;
+  }
+
+  .buttons-accion {
+    border-radius: 9px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 0px;
+}

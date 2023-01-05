@@ -1,0 +1,26 @@
+
+    .tabs
+    {
+        background-color: #80808017 !important;
+        border-radius: 15px;
+        width: 55%;
+    }
+     .tabs .tab a{
+            color:#000;
+        } /*Black color to the text*/
+
+        .tabs .tab a:hover {
+            background-color:#cacaca80 !important;
+            color:#000;
+        } /*Text color on hover*/
+
+        .tabs .tab a.active {
+            background-color:#00b5ff24 !important;
+            color:#000;
+        } /*Background and text color when a tab is active*/
+
+        .tabs .indicator {
+            background-color:#2196f3;
+        } /*Color of underline*/
+
+ 

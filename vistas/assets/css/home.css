@@ -1,0 +1,92 @@
+
+
+.card-image-card-home
+{
+    margin-bottom: 7vh !important;
+}
+.card-title-card-home
+{
+    color: #000 !important;
+    margin-bottom: -8vh !important;
+}
+
+.card-button-add-card-home
+{
+    margin-bottom: -4vh !important;
+}
+
+
+
+.content-wrapper {
+    min-height: calc(100vh - 101px);
+    background-color: #e4e4e4dc;
+    z-index: 1000;
+    padding-bottom: 0vh !important;
+    padding-top: 0vh;
+}
+
+
+
+@media only screen and (min-width : 640px) {
+    #map {
+        
+        position: sticky !important;
+        height: 95%;
+        width: 100%;
+        background-color: #333;
+        max-width: 100vw !important;
+        margin: 0px;
+        padding:58%;
+    }
+  }
+
+@media only screen and (min-width : 768px) {
+    #map {
+        position: sticky !important;
+        height: 95%;
+        width: 100%;
+        background-color: #333;
+        max-width: 97vw !important;
+        margin: 0px;
+        padding:40%;
+    }
+  }
+
+
+@media only screen and (min-width : 992px) {
+    #map {
+        position: sticky !important;
+        height: 95%;
+        width: 100%;
+        background-color: #333;
+        max-width: 97vw !important;
+        margin: 0px;
+        padding:27%;
+    }
+  }
+
+
+  @media only screen and (min-width : 1200px) {
+    #map {
+        position: sticky !important;
+        height: 95%;
+        width: 100%;
+        background-color: #333;
+        max-width: 97vw !important;
+        margin: 0px;
+        padding:27%;
+    }
+  }
+
+
+  @media only screen and (min-width : 1920px) {
+    #map {
+        position: sticky !important;
+        height: 95%;
+        width: 100%;
+        background-color: #333;
+        max-width: 97vw !important;
+        margin: 0px;
+        padding:28%;
+    }
+  }

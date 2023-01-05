@@ -1,0 +1,49 @@
+
+.login-table{
+    height: 100vh;
+    width: 100vw;
+    display: table;
+    margin: auto;
+    background: url("/simop/vistas/assets/images/background.jpg");
+    background-size: cover;
+}
+.login-cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+#login-page {
+   width: 500px;
+}
+.card-login {
+     position: absolute;
+     left: 50%;
+     top: 50%;
+     -moz-transform: translate(-50%, -50%)
+     -webkit-transform: translate(-50%, -50%)
+     -ms-transform: translate(-50%, -50%)
+     -o-transform: translate(-50%, -50%)
+     transform: translate(-50%, -50%);
+}
+
+.page-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-top: 0px;
+}
+
+.password-input .password-show-button {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    z-index: 3;
+    opacity: .5;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.password-input .password-show-button:hover {
+    opacity: .87;
+}

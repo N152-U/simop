@@ -1,0 +1,103 @@
+header, main, footer {
+    padding-left: 0;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.show-contenido {
+    margin: 3rem;
+    padding: 2rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.container {
+    width: 85%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 2rem;
+    margin-top: 2vh;
+    background-color: white;
+}
+
+.disabled {
+    opacity: .4;
+    cursor: default !important;
+    pointer-events: none;
+}
+
+.tabs {
+    background-color: #80808017 !important;
+    border-radius: 15px;
+    width: 55%;
+    height: 29px;
+    display: inline-block;
+    margin-left: 25%;
+}
+
+.tabs .tab {
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    height: 27px;
+    padding: 0;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.tabs .tab a {
+    color: #000;
+}
+
+/*Black color to the text*/
+
+.tabs .tab a:hover {
+    background-color: #cacaca80 !important;
+    color: #000;
+}
+
+/*Text color on hover*/
+
+.tabs .tab a.active {
+    background-color: #00b5ff24 !important;
+    color: #000;
+}
+
+/*Background and text color when a tab is active*/
+
+.tabs .indicator {
+    background-color: #2196f3;
+}
+
+/*Color of underline*/
+
+.tab-contenedor {
+    display: block;
+    border: 1px solid hsla(0, 0%, 68%, 0.38);
+    border-radius: 9px;
+    padding: 12px;
+}
+
+
+
+.borde-personalizado
+{
+    box-shadow:none !important; 
+    border: 1px solid #80808036;
+}
+
+.acciones-privilegiadas
+{
+    position: fixed;
+    right: 0px;
+}
+
+.v-divider-right{
+    border-right:1px solid grey;
+}

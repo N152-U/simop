@@ -1,0 +1,31 @@
+[type="checkbox"].filled-in:checked+span:not(.lever):after {
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #959b9c;
+    background-color: #ec1313;
+    z-index: 0;
+}
+
+/*Select2 ReadOnly Start*/
+    select[readonly].select2-hidden-accessible + .select2-container {
+        pointer-events: none;
+        touch-action: none;
+    }
+
+    select[readonly].select2-hidden-accessible + .select2-container .select2-selection {
+        background: #eee;
+        box-shadow: none;
+    }
+
+    select[readonly].select2-hidden-accessible + .select2-container .select2-selection__arrow, select[readonly].select2-hidden-accessible + .select2-container .select2-selection__clear {
+        display: none;
+    }
+
+/*Select2 ReadOnly End*/
+
+textarea[readonly]
+{
+    background: #eee;
+    box-shadow: none;
+}

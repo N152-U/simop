@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "pozos",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "pozo": "Atarrasquillo", "lat": 19.318065, "lon": -99.459669 }, "geometry": { "type": "Point", "coordinates": [ -99.459669, 19.318065 ] } },
+{ "type": "Feature", "properties": { "pozo": "Ventury II-III", "lat": 19.34507, "lon": -99.4807 }, "geometry": { "type": "Point", "coordinates": [ -99.4807, 19.34507 ] } },
+{ "type": "Feature", "properties": { "pozo": "Alzate", "lat": 19.467358, "lon": -99.704766 }, "geometry": { "type": "Point", "coordinates": [ -99.704766, 19.467358 ] } },
+{ "type": "Feature", "properties": { "pozo": "Dolores", "lat": 19.413653, "lon": -99.197558 }, "geometry": { "type": "Point", "coordinates": [ -99.197558, 19.413653 ] } },
+{ "type": "Feature", "properties": { "pozo": "El Borracho", "lat": 19.377058, "lon": -99.301414 }, "geometry": { "type": "Point", "coordinates": [ -99.301414, 19.377058 ] } },
+{ "type": "Feature", "properties": { "pozo": "El Venado", "lat": 19.405695, "lon": -99.313356 }, "geometry": { "type": "Point", "coordinates": [ -99.313356, 19.405695 ] } }
+]
+}
